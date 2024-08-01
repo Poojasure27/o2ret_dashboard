@@ -1,0 +1,67 @@
+/* styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Neue Regrade Extrabold";
+  src:
+    local("Neue_Regrade_Extrabold"),
+    url("../public/assets/fonts/Neue_Regrade_Extrabold.otf") format("opentype"),
+}
+
+body {
+  font-family: 'Satoshi', sans-serif;
+  background-color: #faf7f0;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+html { scroll-behavior: smooth; }
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+}
+
+p{
+  font-family: 'Satoshi', sans-serif;
+}
+
+.section {
+  height: 330px !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .section {
+      height: 530px !important;
+  }
+}
+
+.cont {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1, h2 {
+  color: rgb(0, 63, 152);
+  font-size: 40px;
+  font-family: "Neue Regrade Extrabold", serif;
+}
+
+#team a {
+  color: #003f98;
+  font-family: "Neue Regrade Extrabold", serif;
+}
+
+#service {
+  padding: 5%;
+}
+
+@media screen and (max-width: 768px) {
+  #service {
+    padding: 2.5%;
+  }
+  
+}
