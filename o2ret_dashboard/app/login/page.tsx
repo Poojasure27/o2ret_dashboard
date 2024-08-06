@@ -1,28 +1,30 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { login } from "./actions";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import styles from "./login.module.css";
-import 'bootstrap/dist/css/bootstrap.css';
-
-// Corrected imports for images and icons
 import logo from "/public/assets/images/logo.png";
 import image from "/public/assets/images/dashboard.png";
 import emailIcon from "/public/assets/icons/mail.svg";
 import lockIcon from "/public/assets/icons/lock.svg";
-import eyeIcon from "/public/assets/icons/eye-closed.svg";
+import eyeIconClosed from "/public/assets/icons/eye-closed.svg";
+import 'bootstrap/dist/css/bootstrap.css';
+import  eyeIconOpen from "/public/assets/icons/eye-open.svg";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+  const router = useRouter(); // Initialize useRouter
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    
+    // Convert form data to plain object
     const formData = {
       email,
       password,
@@ -46,14 +48,6 @@ const Login: React.FC = () => {
         <div className={styles.loginForm}>
           <div className={styles.signIn}>
             <h2>Sign In</h2>
-            <p>
-              If you don&apos;t have an account you
-              <br />
-              can{" "}
-              <strong>
-                <Link href="/register">Register here!</Link>
-              </strong>
-            </p>
           </div>
           <form onSubmit={handleSubmit}>
             <div className={styles.inputGroup}>
@@ -87,37 +81,43 @@ const Login: React.FC = () => {
                   className={styles.leftIcon}
                 />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   placeholder="Enter your Password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                 <Image
-                  src={eyeIcon}
+                  src={showPassword ? eyeIconOpen : eyeIconClosed}
                   alt="Eye Icon"
                   width={17}
                   height={17}
                   className={styles.rightIcon}
                 />
+                </button>
               </div>
             </div>
-            {error && (
+            {error != "" && (
               <div className="alert alert-dark" role="alert">
                 {error}
               </div>
             )}
             <div className={styles.options}>
-              <label>
+              {/* <label>
                 <input type="checkbox" />
                 <span>Remember me</span>
-              </label>
+              </label> */}
               <Link href="/forgot-password">Forgot Password?</Link>
             </div>
             <button
               type="submit"
               className={styles.loginButton}
+              // formAction={login}
             >
               Login
             </button>
